@@ -1,0 +1,22 @@
+[2026-09-13T05:53:36.389+0000] {taskinstance.py:1125} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: penguins_pipeline.cargar_penguins manual__2026-09-13T05:53:32.122997+00:00 [queued]>
+[2026-09-13T05:53:36.423+0000] {taskinstance.py:1125} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: penguins_pipeline.cargar_penguins manual__2026-09-13T05:53:32.122997+00:00 [queued]>
+[2026-09-13T05:53:36.424+0000] {taskinstance.py:1331} INFO - Starting attempt 1 of 1
+[2026-09-13T05:53:36.465+0000] {taskinstance.py:1350} INFO - Executing <Task(PythonOperator): cargar_penguins> on 2026-09-13 05:53:32.122997+00:00
+[2026-09-13T05:53:36.478+0000] {standard_task_runner.py:57} INFO - Started process 1069 to run task
+[2026-09-13T05:53:36.489+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'penguins_pipeline', 'cargar_penguins', 'manual__2026-09-13T05:53:32.122997+00:00', '--job-id', '1240', '--raw', '--subdir', 'DAGS_FOLDER/1_dag_flujo.py', '--cfg-path', '/tmp/tmpy92b9ado']
+[2026-09-13T05:53:36.491+0000] {standard_task_runner.py:85} INFO - Job 1240: Subtask cargar_penguins
+[2026-09-13T05:53:36.647+0000] {task_command.py:410} INFO - Running <TaskInstance: penguins_pipeline.cargar_penguins manual__2026-09-13T05:53:32.122997+00:00 [running]> on host 049a59933c74
+[2026-09-13T05:53:36.916+0000] {taskinstance.py:1570} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='penguins_pipeline' AIRFLOW_CTX_TASK_ID='cargar_penguins' AIRFLOW_CTX_EXECUTION_DATE='2026-09-13T05:53:32.122997+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-09-13T05:53:32.122997+00:00'
+[2026-09-13T05:53:36.919+0000] {taskinstance.py:1847} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 181, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 198, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/1_dag_flujo.py", line 49, in cargar_penguins
+    with open(ruta, newline="", encoding="utf-8-sig") as archivo:
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/airflow/data/penguins.csv'
+[2026-09-13T05:53:37.022+0000] {taskinstance.py:1373} INFO - Marking task as FAILED. dag_id=penguins_pipeline, task_id=cargar_penguins, execution_date=20260913T055332, start_date=20260913T055336, end_date=20260913T055337
+[2026-09-13T05:53:37.062+0000] {standard_task_runner.py:109} ERROR - Failed to execute job 1240 for task cargar_penguins ([Errno 2] No such file or directory: '/opt/airflow/data/penguins.csv'; 1069)
+[2026-09-13T05:53:37.101+0000] {local_task_job_runner.py:232} INFO - Task exited with return code 1
+[2026-09-13T05:53:37.186+0000] {taskinstance.py:2674} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,36 @@
+[2026-09-13T21:19:33.265+0000] {taskinstance.py:1125} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: penguins_pipeline.entrenar_modelo manual__2026-09-13T21:19:09.926509+00:00 [queued]>
+[2026-09-13T21:19:33.284+0000] {taskinstance.py:1125} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: penguins_pipeline.entrenar_modelo manual__2026-09-13T21:19:09.926509+00:00 [queued]>
+[2026-09-13T21:19:33.285+0000] {taskinstance.py:1331} INFO - Starting attempt 1 of 1
+[2026-09-13T21:19:33.321+0000] {taskinstance.py:1350} INFO - Executing <Task(PythonOperator): entrenar_modelo> on 2026-09-13 21:19:09.926509+00:00
+[2026-09-13T21:19:33.349+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'penguins_pipeline', 'entrenar_modelo', 'manual__2026-09-13T21:19:09.926509+00:00', '--job-id', '1267', '--raw', '--subdir', 'DAGS_FOLDER/1_dag_flujo.py', '--cfg-path', '/tmp/tmpnorx9zfk']
+[2026-09-13T21:19:33.354+0000] {standard_task_runner.py:85} INFO - Job 1267: Subtask entrenar_modelo
+[2026-09-13T21:19:33.342+0000] {standard_task_runner.py:57} INFO - Started process 97 to run task
+[2026-09-13T21:19:33.497+0000] {task_command.py:410} INFO - Running <TaskInstance: penguins_pipeline.entrenar_modelo manual__2026-09-13T21:19:09.926509+00:00 [running]> on host b87f0206ec33
+[2026-09-13T21:19:33.725+0000] {taskinstance.py:1570} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='penguins_pipeline' AIRFLOW_CTX_TASK_ID='entrenar_modelo' AIRFLOW_CTX_EXECUTION_DATE='2026-09-13T21:19:09.926509+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-09-13T21:19:09.926509+00:00'
+[2026-09-13T21:19:33.752+0000] {base.py:73} INFO - Using connection ID 'mysql_penguins' for task execution.
+[2026-09-13T21:19:33.779+0000] {sql.py:375} INFO - Running statement: 
+        SELECT
+            bill_length_mm,
+            bill_depth_mm,
+            flipper_length_mm,
+            body_mass_g,
+            species,
+            conjunto
+        FROM penguins_processed
+        ORDER BY rowid
+    , parameters: None
+[2026-09-13T21:19:33.783+0000] {sql.py:384} INFO - Rows affected: 342
+[2026-09-13T21:19:33.824+0000] {logging_mixin.py:149} INFO - Accuracy: 0.9855
+[2026-09-13T21:19:33.824+0000] {logging_mixin.py:149} INFO - F1 macro: 0.9822
+[2026-09-13T21:19:33.837+0000] {base.py:73} INFO - Using connection ID 'mysql_penguins' for task execution.
+[2026-09-13T21:19:33.849+0000] {sql.py:375} INFO - Running statement: 
+        SELECT parametros
+        FROM penguins_scaler
+        WHERE nombre = 'minmax'
+    , parameters: None
+[2026-09-13T21:19:33.850+0000] {sql.py:384} INFO - Rows affected: 1
+[2026-09-13T21:19:33.854+0000] {logging_mixin.py:149} INFO - Modelo guardado correctamente en: /opt/***/models/penguins_model.pkl
+[2026-09-13T21:19:33.854+0000] {python.py:183} INFO - Done. Returned value was: None
+[2026-09-13T21:19:33.873+0000] {taskinstance.py:1373} INFO - Marking task as SUCCESS. dag_id=penguins_pipeline, task_id=entrenar_modelo, execution_date=20260913T211909, start_date=20260913T211933, end_date=20260913T211933
+[2026-09-13T21:19:33.909+0000] {local_task_job_runner.py:232} INFO - Task exited with return code 0
+[2026-09-13T21:19:34.006+0000] {taskinstance.py:2674} INFO - 0 downstream tasks scheduled from follow-on schedule check

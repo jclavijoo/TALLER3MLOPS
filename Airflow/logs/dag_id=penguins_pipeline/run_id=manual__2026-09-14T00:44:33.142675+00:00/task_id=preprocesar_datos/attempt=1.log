@@ -1,0 +1,58 @@
+[2026-09-14T00:44:51.845+0000] {taskinstance.py:1125} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: penguins_pipeline.preprocesar_datos manual__2026-09-14T00:44:33.142675+00:00 [queued]>
+[2026-09-14T00:44:51.879+0000] {taskinstance.py:1125} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: penguins_pipeline.preprocesar_datos manual__2026-09-14T00:44:33.142675+00:00 [queued]>
+[2026-09-14T00:44:51.879+0000] {taskinstance.py:1331} INFO - Starting attempt 1 of 1
+[2026-09-14T00:44:51.920+0000] {taskinstance.py:1350} INFO - Executing <Task(PythonOperator): preprocesar_datos> on 2026-09-14 00:44:33.142675+00:00
+[2026-09-14T00:44:51.941+0000] {standard_task_runner.py:57} INFO - Started process 3541 to run task
+[2026-09-14T00:44:51.954+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'penguins_pipeline', 'preprocesar_datos', 'manual__2026-09-14T00:44:33.142675+00:00', '--job-id', '1278', '--raw', '--subdir', 'DAGS_FOLDER/1_dag_flujo.py', '--cfg-path', '/tmp/tmpgofxr_3y']
+[2026-09-14T00:44:51.962+0000] {standard_task_runner.py:85} INFO - Job 1278: Subtask preprocesar_datos
+[2026-09-14T00:44:52.120+0000] {task_command.py:410} INFO - Running <TaskInstance: penguins_pipeline.preprocesar_datos manual__2026-09-14T00:44:33.142675+00:00 [running]> on host b87f0206ec33
+[2026-09-14T00:44:52.444+0000] {taskinstance.py:1570} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='penguins_pipeline' AIRFLOW_CTX_TASK_ID='preprocesar_datos' AIRFLOW_CTX_EXECUTION_DATE='2026-09-14T00:44:33.142675+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-09-14T00:44:33.142675+00:00'
+[2026-09-14T00:45:02.491+0000] {base.py:73} INFO - Using connection ID 'mysql_penguins' for task execution.
+[2026-09-14T00:45:02.527+0000] {sql.py:375} INFO - Running statement: 
+        SELECT
+            rowid,
+            species,
+            bill_length_mm,
+            bill_depth_mm,
+            flipper_length_mm,
+            body_mass_g
+        FROM penguins_raw
+        ORDER BY CAST(rowid AS UNSIGNED)
+    , parameters: None
+[2026-09-14T00:45:02.530+0000] {sql.py:384} INFO - Rows affected: 344
+[2026-09-14T00:45:02.595+0000] {base.py:73} INFO - Using connection ID 'mysql_penguins' for task execution.
+[2026-09-14T00:45:02.611+0000] {sql.py:375} INFO - Running statement: 
+        CREATE TABLE IF NOT EXISTS penguins_processed (
+            rowid INT PRIMARY KEY,
+            species VARCHAR(50) NOT NULL,
+            bill_length_mm DOUBLE NOT NULL,
+            bill_depth_mm DOUBLE NOT NULL,
+            flipper_length_mm DOUBLE NOT NULL,
+            body_mass_g DOUBLE NOT NULL,
+            conjunto VARCHAR(10) NOT NULL
+        )
+    , parameters: None
+[2026-09-14T00:45:02.616+0000] {sql.py:384} INFO - Rows affected: 0
+[2026-09-14T00:45:02.638+0000] {base.py:73} INFO - Using connection ID 'mysql_penguins' for task execution.
+[2026-09-14T00:45:02.660+0000] {sql.py:375} INFO - Running statement: 
+        SHOW COLUMNS FROM penguins_processed LIKE 'conjunto'
+    , parameters: None
+[2026-09-14T00:45:02.664+0000] {sql.py:384} INFO - Rows affected: 1
+[2026-09-14T00:45:02.689+0000] {base.py:73} INFO - Using connection ID 'mysql_penguins' for task execution.
+[2026-09-14T00:45:02.706+0000] {sql.py:375} INFO - Running statement: 
+        CREATE TABLE IF NOT EXISTS penguins_scaler (
+            nombre VARCHAR(50) PRIMARY KEY,
+            parametros JSON NOT NULL
+        )
+    , parameters: None
+[2026-09-14T00:45:02.710+0000] {sql.py:384} INFO - Rows affected: 0
+[2026-09-14T00:45:02.735+0000] {base.py:73} INFO - Using connection ID 'mysql_penguins' for task execution.
+[2026-09-14T00:45:02.815+0000] {logging_mixin.py:149} INFO - Filas originales: 344
+[2026-09-14T00:45:02.815+0000] {logging_mixin.py:149} INFO - Filas válidas: 342
+[2026-09-14T00:45:02.817+0000] {logging_mixin.py:149} INFO - Entrenamiento: 273
+[2026-09-14T00:45:02.817+0000] {logging_mixin.py:149} INFO - Prueba: 69
+[2026-09-14T00:45:02.818+0000] {logging_mixin.py:149} INFO - Datos normalizados y parámetros guardados en MySQL.
+[2026-09-14T00:45:02.818+0000] {python.py:183} INFO - Done. Returned value was: None
+[2026-09-14T00:45:02.854+0000] {taskinstance.py:1373} INFO - Marking task as SUCCESS. dag_id=penguins_pipeline, task_id=preprocesar_datos, execution_date=20260914T004433, start_date=20260914T004451, end_date=20260914T004502
+[2026-09-14T00:45:02.937+0000] {local_task_job_runner.py:232} INFO - Task exited with return code 0
+[2026-09-14T00:45:03.007+0000] {taskinstance.py:2674} INFO - 1 downstream tasks scheduled from follow-on schedule check

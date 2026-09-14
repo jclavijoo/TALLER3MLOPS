@@ -1,0 +1,16 @@
+[2026-09-14T00:29:25.412+0000] {taskinstance.py:1125} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: penguins_pipeline.cargar_penguins manual__2026-09-14T00:29:19.226261+00:00 [queued]>
+[2026-09-14T00:29:25.425+0000] {taskinstance.py:1125} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: penguins_pipeline.cargar_penguins manual__2026-09-14T00:29:19.226261+00:00 [queued]>
+[2026-09-14T00:29:25.425+0000] {taskinstance.py:1331} INFO - Starting attempt 1 of 1
+[2026-09-14T00:29:25.448+0000] {taskinstance.py:1350} INFO - Executing <Task(PythonOperator): cargar_penguins> on 2026-09-14 00:29:19.226261+00:00
+[2026-09-14T00:29:25.461+0000] {standard_task_runner.py:57} INFO - Started process 3274 to run task
+[2026-09-14T00:29:25.475+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'penguins_pipeline', 'cargar_penguins', 'manual__2026-09-14T00:29:19.226261+00:00', '--job-id', '1273', '--raw', '--subdir', 'DAGS_FOLDER/1_dag_flujo.py', '--cfg-path', '/tmp/tmp1zstyyek']
+[2026-09-14T00:29:25.483+0000] {standard_task_runner.py:85} INFO - Job 1273: Subtask cargar_penguins
+[2026-09-14T00:29:25.623+0000] {task_command.py:410} INFO - Running <TaskInstance: penguins_pipeline.cargar_penguins manual__2026-09-14T00:29:19.226261+00:00 [running]> on host b87f0206ec33
+[2026-09-14T00:29:25.887+0000] {taskinstance.py:1570} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='penguins_pipeline' AIRFLOW_CTX_TASK_ID='cargar_penguins' AIRFLOW_CTX_EXECUTION_DATE='2026-09-14T00:29:19.226261+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-09-14T00:29:19.226261+00:00'
+[2026-09-14T00:29:30.936+0000] {base.py:73} INFO - Using connection ID 'mysql_penguins' for task execution.
+[2026-09-14T00:29:31.264+0000] {sql.py:473} INFO - Done loading. Loaded a total of 344 rows into penguins_raw
+[2026-09-14T00:29:31.265+0000] {logging_mixin.py:149} INFO - Se cargaron 344 filas en penguins_raw
+[2026-09-14T00:29:31.267+0000] {python.py:183} INFO - Done. Returned value was: None
+[2026-09-14T00:29:31.303+0000] {taskinstance.py:1373} INFO - Marking task as SUCCESS. dag_id=penguins_pipeline, task_id=cargar_penguins, execution_date=20260914T002919, start_date=20260914T002925, end_date=20260914T002931
+[2026-09-14T00:29:31.398+0000] {local_task_job_runner.py:232} INFO - Task exited with return code 0
+[2026-09-14T00:29:31.447+0000] {taskinstance.py:2674} INFO - 1 downstream tasks scheduled from follow-on schedule check

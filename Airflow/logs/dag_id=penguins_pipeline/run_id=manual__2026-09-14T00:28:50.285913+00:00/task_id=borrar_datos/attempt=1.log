@@ -1,0 +1,32 @@
+[2026-09-14T00:28:52.655+0000] {taskinstance.py:1125} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: penguins_pipeline.borrar_datos manual__2026-09-14T00:28:50.285913+00:00 [queued]>
+[2026-09-14T00:28:52.688+0000] {taskinstance.py:1125} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: penguins_pipeline.borrar_datos manual__2026-09-14T00:28:50.285913+00:00 [queued]>
+[2026-09-14T00:28:52.689+0000] {taskinstance.py:1331} INFO - Starting attempt 1 of 1
+[2026-09-14T00:28:52.727+0000] {taskinstance.py:1350} INFO - Executing <Task(PythonOperator): borrar_datos> on 2026-09-14 00:28:50.285913+00:00
+[2026-09-14T00:28:52.745+0000] {standard_task_runner.py:57} INFO - Started process 3250 to run task
+[2026-09-14T00:28:52.759+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'penguins_pipeline', 'borrar_datos', 'manual__2026-09-14T00:28:50.285913+00:00', '--job-id', '1268', '--raw', '--subdir', 'DAGS_FOLDER/1_dag_flujo.py', '--cfg-path', '/tmp/tmpzwtzo3pa']
+[2026-09-14T00:28:52.766+0000] {standard_task_runner.py:85} INFO - Job 1268: Subtask borrar_datos
+[2026-09-14T00:28:52.924+0000] {task_command.py:410} INFO - Running <TaskInstance: penguins_pipeline.borrar_datos manual__2026-09-14T00:28:50.285913+00:00 [running]> on host b87f0206ec33
+[2026-09-14T00:28:53.187+0000] {taskinstance.py:1570} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='penguins_pipeline' AIRFLOW_CTX_TASK_ID='borrar_datos' AIRFLOW_CTX_EXECUTION_DATE='2026-09-14T00:28:50.285913+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-09-14T00:28:50.285913+00:00'
+[2026-09-14T00:28:53.224+0000] {base.py:73} INFO - Using connection ID 'mysql_penguins' for task execution.
+[2026-09-14T00:28:53.264+0000] {sql.py:375} INFO - Running statement: 
+        CREATE TABLE IF NOT EXISTS penguins_raw (
+            rowid VARCHAR(20),
+            species VARCHAR(50),
+            island VARCHAR(50),
+            bill_length_mm VARCHAR(30),
+            bill_depth_mm VARCHAR(30),
+            flipper_length_mm VARCHAR(30),
+            body_mass_g VARCHAR(30),
+            sex VARCHAR(20),
+            year VARCHAR(10)
+        )
+    , parameters: None
+[2026-09-14T00:28:53.274+0000] {sql.py:384} INFO - Rows affected: 0
+[2026-09-14T00:28:53.285+0000] {base.py:73} INFO - Using connection ID 'mysql_penguins' for task execution.
+[2026-09-14T00:28:53.298+0000] {sql.py:375} INFO - Running statement: DELETE FROM penguins_raw, parameters: None
+[2026-09-14T00:28:53.302+0000] {sql.py:384} INFO - Rows affected: 344
+[2026-09-14T00:28:53.343+0000] {logging_mixin.py:149} INFO - La tabla penguins_raw se ha vaciado y creado.
+[2026-09-14T00:28:53.345+0000] {python.py:183} INFO - Done. Returned value was: None
+[2026-09-14T00:28:53.379+0000] {taskinstance.py:1373} INFO - Marking task as SUCCESS. dag_id=penguins_pipeline, task_id=borrar_datos, execution_date=20260914T002850, start_date=20260914T002852, end_date=20260914T002853
+[2026-09-14T00:28:53.451+0000] {local_task_job_runner.py:232} INFO - Task exited with return code 0
+[2026-09-14T00:28:53.546+0000] {taskinstance.py:2674} INFO - 1 downstream tasks scheduled from follow-on schedule check

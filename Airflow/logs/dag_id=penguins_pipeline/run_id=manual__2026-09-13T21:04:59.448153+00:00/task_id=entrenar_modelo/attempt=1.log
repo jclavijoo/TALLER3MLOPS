@@ -1,0 +1,46 @@
+[2026-09-13T21:05:24.524+0000] {taskinstance.py:1125} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: penguins_pipeline.entrenar_modelo manual__2026-09-13T21:04:59.448153+00:00 [queued]>
+[2026-09-13T21:05:24.560+0000] {taskinstance.py:1125} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: penguins_pipeline.entrenar_modelo manual__2026-09-13T21:04:59.448153+00:00 [queued]>
+[2026-09-13T21:05:24.561+0000] {taskinstance.py:1331} INFO - Starting attempt 1 of 1
+[2026-09-13T21:05:24.615+0000] {taskinstance.py:1350} INFO - Executing <Task(PythonOperator): entrenar_modelo> on 2026-09-13 21:04:59.448153+00:00
+[2026-09-13T21:05:24.633+0000] {standard_task_runner.py:57} INFO - Started process 721 to run task
+[2026-09-13T21:05:24.648+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'penguins_pipeline', 'entrenar_modelo', 'manual__2026-09-13T21:04:59.448153+00:00', '--job-id', '1261', '--raw', '--subdir', 'DAGS_FOLDER/1_dag_flujo.py', '--cfg-path', '/tmp/tmpp0htx2oz']
+[2026-09-13T21:05:24.657+0000] {standard_task_runner.py:85} INFO - Job 1261: Subtask entrenar_modelo
+[2026-09-13T21:05:24.827+0000] {task_command.py:410} INFO - Running <TaskInstance: penguins_pipeline.entrenar_modelo manual__2026-09-13T21:04:59.448153+00:00 [running]> on host 24358612f7c0
+[2026-09-13T21:05:25.155+0000] {taskinstance.py:1570} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='penguins_pipeline' AIRFLOW_CTX_TASK_ID='entrenar_modelo' AIRFLOW_CTX_EXECUTION_DATE='2026-09-13T21:04:59.448153+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-09-13T21:04:59.448153+00:00'
+[2026-09-13T21:05:25.188+0000] {base.py:73} INFO - Using connection ID 'mysql_penguins' for task execution.
+[2026-09-13T21:05:25.226+0000] {sql.py:375} INFO - Running statement: 
+        SELECT
+            bill_length_mm,
+            bill_depth_mm,
+            flipper_length_mm,
+            body_mass_g,
+            species,
+            conjunto
+        FROM penguins_processed
+        ORDER BY rowid
+    , parameters: None
+[2026-09-13T21:05:25.233+0000] {sql.py:384} INFO - Rows affected: 342
+[2026-09-13T21:05:25.439+0000] {logging_mixin.py:149} INFO - Accuracy: 0.9855
+[2026-09-13T21:05:25.439+0000] {logging_mixin.py:149} INFO - F1 macro: 0.9822
+[2026-09-13T21:05:25.461+0000] {base.py:73} INFO - Using connection ID 'mysql_penguins' for task execution.
+[2026-09-13T21:05:25.479+0000] {sql.py:375} INFO - Running statement: 
+        SELECT parametros
+        FROM penguins_scaler
+        WHERE nombre = 'minmax'
+    , parameters: None
+[2026-09-13T21:05:25.481+0000] {sql.py:384} INFO - Rows affected: 1
+[2026-09-13T21:05:25.485+0000] {taskinstance.py:1847} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 181, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 198, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/1_dag_flujo.py", line 350, in entrenar_modelo
+    joblib.dump(paquete, ruta_temporal)
+  File "/home/airflow/.local/lib/python3.7/site-packages/joblib/numpy_pickle.py", line 552, in dump
+    with open(filename, 'wb') as f:
+PermissionError: [Errno 13] Permission denied: '/opt/airflow/models/penguins_model.tmp'
+[2026-09-13T21:05:25.519+0000] {taskinstance.py:1373} INFO - Marking task as FAILED. dag_id=penguins_pipeline, task_id=entrenar_modelo, execution_date=20260913T210459, start_date=20260913T210524, end_date=20260913T210525
+[2026-09-13T21:05:25.553+0000] {standard_task_runner.py:109} ERROR - Failed to execute job 1261 for task entrenar_modelo ([Errno 13] Permission denied: '/opt/airflow/models/penguins_model.tmp'; 721)
+[2026-09-13T21:05:25.581+0000] {local_task_job_runner.py:232} INFO - Task exited with return code 1
+[2026-09-13T21:05:25.655+0000] {taskinstance.py:2674} INFO - 0 downstream tasks scheduled from follow-on schedule check
