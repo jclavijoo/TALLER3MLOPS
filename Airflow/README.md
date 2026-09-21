@@ -48,3 +48,61 @@ Usando docker compose:
 4. Cree API que permita realizar inferencia al modelo entrenado
 
 Todos los servicios deben existir en el mismo docker compose!
+
+
+
+## PASO A PASO PARA LEVANTAR EL SERVICIO
+
+1. Construya la imagen de docker:
+
+```bash
+docker compose build
+```
+
+Una vez construida la imagen airflow-penguins:2.6.0, despliega la arquitectura:
+
+```bash
+docker compose up -d
+```
+### Servicios principales desplegados:
+
+- airflow-webserver (http://localhost:8081)
+
+- airflow-scheduler
+
+- airflow-worker
+
+- airflow-mysql-1 (Puerto interno 3306)
+
+- airflow-penguins-api-1 (http://localhost:8027/docs)
+
+### Ejecución de la Canalización (DAG)
+
+1. Ingresa a la interfaz gráfica de Airflow:
+
+- URL: http://localhost:8081
+
+2. Inicia sesión con las credenciales:
+
+- Usuario: airflow
+
+- Contraseña: airflow
+
+3. Diríjase a la pestaña DAGs y activa el interruptor del DAG penguins_pipeline.
+
+4. Haz clic en el botón de reproducción Trigger DAG.
+
+(Tiempo estimado de ejecución del DAG: ~20 a 45 segundos).
+
+
+### Inferencia del Modelo con FastAPI
+
+Una vez que el DAG haya finalizado todas sus tareas.
+
+1. Acceda la documentación interactiva de la API y ejecutar el modelo
+
+- URL: http://localhost:8027/docs
+
+2. Despliega el endpoint POST /predict.
+
+
