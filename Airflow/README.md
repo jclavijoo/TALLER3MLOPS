@@ -64,6 +64,12 @@ Una vez construida la imagen airflow-penguins:2.6.0, despliega la arquitectura:
 ```bash
 docker compose up -d
 ```
+
+### Puertos usados:
+
+- Puerto 8081: Interfaz de usuario de Airflow
+- Puerto 8027: Entorno de FastAPI
+
 ### Servicios principales desplegados:
 
 - airflow-webserver (http://localhost:8081)
